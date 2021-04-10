@@ -33,13 +33,11 @@ public class Main {
                 .addNewCustomer(6, 74);
 
 
-        customerSuccessBalancingService.
+        System.out.println(customerSuccessBalancingService.
                 calculateCustomerSuccessWithMoreClients(customerSuccessBalancingService.getCustomersList(),
-                        customerSuccessBalancingService.getCustomersSuccessList(), 2);
+                        customerSuccessBalancingService.getCustomersSuccessList(), 2));
 
-//        System.out.println(customerSuccessBalancingService.findTheApproximateNumberOnList(0.1,
-//                customerSuccessBalancingService.getCustomersList(),
-//                customerSuccessBalancingService.getCustomersSuccessList()));
+        customerSuccessBalancingService.getCustomersSuccessList()));
 
         System.out.println(customerSuccessBalancingService.getCustomersList());
     }

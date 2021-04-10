@@ -62,18 +62,18 @@ public class CustomerSuccessBalancingService {
             return false;
     }
 
-    public Object findTheApproximateNumberOnList(Double margin,
-                                                  List<Customer> customersList,
-                                                  List<CustomerSuccess> customersSuccessList) {
+    private void findTheApproximateNumberOnList(Double margin,
+                                               List<Customer> customersList,
+                                               List<CustomerSuccess> customersSuccessList) {
         for (Customer customer : customersList)
             for (CustomerSuccess customerSuccess : customersSuccessList) {
                 if (customer.getLEVEL().equals(customerSuccess.getLEVEL())) {
                     customer.setIdCS(customerSuccess.getID());
                 } else if ((customerSuccess.getLEVEL() < ((customer.getLEVEL() * margin) + customer.getLEVEL()))
-                        && (customerSuccess.getLEVEL() > customer.getLEVEL()))
+                        && (customerSuccess.getLEVEL() > customer.getLEVEL())) {
                     customer.setIdCS(customerSuccess.getID());
+                }
             }
-        return Optional.empty();
     }
 
     private void removeNotAvailableCustomerSuccess(Integer... notAvailableCustomerSuccessIds){
@@ -95,7 +95,9 @@ public class CustomerSuccessBalancingService {
         customersList.forEach(customer -> customerSuccessWithMoreClients
                 .compute(customer.getIdCS(), (k, v) -> (v == null ? 1 : v + 1)));
 
-        List<Integer> draw = customerSuccessWithMoreClients.values()
+         customerSuccessWithMoreClients.remove(null);
+
+         List<Integer> draw = customerSuccessWithMoreClients.values()
                 .stream()
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
