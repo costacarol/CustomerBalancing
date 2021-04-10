@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 public class CustomerSuccessBalancingService {
 
-    private final List<Customer> customersList;
-    private final List<CustomerSuccess> customersSuccessList;
+    private List<Customer> customersList;
+    private List<CustomerSuccess> customersSuccessList;
 
     public CustomerSuccessBalancingService() {
         this.customersList = new ArrayList<>();
@@ -77,7 +77,6 @@ public class CustomerSuccessBalancingService {
     }
 
     private void removeNotAvailableCustomerSuccess(Integer... notAvailableCustomerSuccessIds){
-        if(notAvailableCustomerSuccessIds.length > (Math.floor(customersSuccessList.size()/2)){
         for (Integer number: notAvailableCustomerSuccessIds) {
             customersSuccessList.removeIf(cs -> number.equals(cs.getID()));
         }
@@ -86,8 +85,11 @@ public class CustomerSuccessBalancingService {
     public Object calculateCustomerSuccessWithMoreClients(List<Customer> customersList,
                                                           List<CustomerSuccess> customersSuccessList,
                                                           Integer... notAvailableCustomerSuccessIds){
-        if(notAvailableCustomerSuccessIds.length > Math.floor   )
-        this.removeNotAvailableCustomerSuccess(notAvailableCustomerSuccessIds);
+        if(notAvailableCustomerSuccessIds.length > Math.floor(customersSuccessList.size()/2)){
+            throw new IllegalArgumentException("The number of absent is greater than allowed");
+        }else {
+            this.removeNotAvailableCustomerSuccess(notAvailableCustomerSuccessIds);
+        }
         this.findTheApproximateNumberOnList(0.1, customersList, customersSuccessList);
         Map<Integer, Integer> customerSuccessWithMoreClients = new HashMap<>();
         customersList.forEach(customer -> customerSuccessWithMoreClients
