@@ -1,21 +1,21 @@
 package com.costacarol.customersuccessbalancing.model;
 
 public class Customer {
-    private Integer ID;
-    private Integer LEVEL;
+    private Integer id;
+    private Integer level;
     private Integer idCS;
 
     public Customer(Integer id, Integer level) {
-        this.ID = id;
-        this.LEVEL = level;
+        this.id = id;
+        this.level = level;
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getLEVEL() {
-        return LEVEL;
+    public Integer getLevel() {
+        return level;
     }
 
     public Integer getIdCS() {
@@ -29,8 +29,8 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + ID +
-                ", level=" + LEVEL +
+                "id=" + id +
+                ", level=" + level +
                 ", idCS=" + idCS +
                 '}';
     }

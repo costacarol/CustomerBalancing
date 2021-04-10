@@ -49,7 +49,7 @@ public class CustomerSuccessBalancingService {
                 && customerSuccessLevel < 10000)
                 && customersSuccessList.size() < 1000
                 && customersSuccessList.stream()
-                .noneMatch(customerSuccess -> customerSuccess.getLEVEL().equals(customerSuccessLevel))
+                .noneMatch(customerSuccess -> customerSuccess.getLevel().equals(customerSuccessLevel))
         ){
 
             CustomerSuccess customerSuccess = new CustomerSuccess(
@@ -63,22 +63,22 @@ public class CustomerSuccessBalancingService {
     }
 
     private void findTheApproximateNumberOnList(Double margin,
-                                               List<Customer> customersList,
-                                               List<CustomerSuccess> customersSuccessList) {
+                                                List<Customer> customersList,
+                                                List<CustomerSuccess> customersSuccessList) {
         for (Customer customer : customersList)
             for (CustomerSuccess customerSuccess : customersSuccessList) {
-                if (customer.getLEVEL().equals(customerSuccess.getLEVEL())) {
-                    customer.setIdCS(customerSuccess.getID());
-                } else if ((customerSuccess.getLEVEL() < ((customer.getLEVEL() * margin) + customer.getLEVEL()))
-                        && (customerSuccess.getLEVEL() > customer.getLEVEL())) {
-                    customer.setIdCS(customerSuccess.getID());
+                if (customer.getLevel().equals(customerSuccess.getLevel())) {
+                    customer.setIdCS(customerSuccess.getId());
+                } else if ((customerSuccess.getLevel() < ((customer.getLevel() * margin) + customer.getLevel()))
+                        && (customerSuccess.getLevel() > customer.getLevel())) {
+                    customer.setIdCS(customerSuccess.getId());
                 }
             }
     }
 
     private void removeNotAvailableCustomerSuccess(Integer... notAvailableCustomerSuccessIds){
         for (Integer number: notAvailableCustomerSuccessIds) {
-            customersSuccessList.removeIf(cs -> number.equals(cs.getID()));
+            customersSuccessList.removeIf(cs -> number.equals(cs.getId()));
         }
     }
 
@@ -95,9 +95,9 @@ public class CustomerSuccessBalancingService {
         customersList.forEach(customer -> customerSuccessWithMoreClients
                 .compute(customer.getIdCS(), (k, v) -> (v == null ? 1 : v + 1)));
 
-         customerSuccessWithMoreClients.remove(null);
+        customerSuccessWithMoreClients.remove(null);
 
-         List<Integer> draw = customerSuccessWithMoreClients.values()
+        List<Integer> draw = customerSuccessWithMoreClients.values()
                 .stream()
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());

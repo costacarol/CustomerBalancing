@@ -2,21 +2,21 @@ package com.costacarol.customersuccessbalancing.model;
 
 public class CustomerSuccess {
 
-    private Integer ID;
-    private Integer LEVEL;
+    private Integer id;
+    private Integer level;
 
 
     public CustomerSuccess(Integer id, Integer level) {
-        this.ID = id;
-        this.LEVEL = level;
+        this.id = id;
+        this.level = level;
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getLEVEL() {
-        return LEVEL;
+    public Integer getLevel() {
+        return level;
     }
 
 }
